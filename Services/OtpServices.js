@@ -14,7 +14,6 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-console.log(process.env.Email, process.env.Password)
 
 // async..await is not allowed in global scope, must use a wrapper
 export async function SendMail(To,Subject,Text,Otp) {
@@ -27,6 +26,5 @@ export async function SendMail(To,Subject,Text,Otp) {
     html: `Your otp is ${Otp}`, // html body
   });
 
-  console.log("Message sent: %s", info.messageId);
   // Message sent: <d786aa62-4e0a-070a-47ed-0b0666549519@ethereal.email>
 }
