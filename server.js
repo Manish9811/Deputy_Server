@@ -15,7 +15,7 @@ app.use(cookieParser());
 app.use(express.json());
 
 // Enable CORS
-const allowedOrigins = ['https://deputy-clone-frontend.vercel.app', 'http://localhost:3000'];
+const allowedOrigins = ['https://deputy-clone-frontend.vercel.app','https://deputy-clone-frontend-1x5v-ep6gbyqsa-manish9811s-projects.vercel.app', 'http://localhost:3000'];
 
 app.use(cors({
   origin: function (origin, callback) {
@@ -44,3 +44,4 @@ app.use('/api/auth', AuthenticationCheck);
 app.listen(port, () => {
   console.log(`App is running on port ${port}`);
 });
+ç
