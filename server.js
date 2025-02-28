@@ -15,7 +15,7 @@ const port = process.env.PORT || 5002
 // Enable CORS
 app.use(cors({
   // origin: [`https://deputy-clone-frontend-git-main-manish9811s-projects.vercel.app`,'http://localhost:3000'],
-  origin : "http://localhost:3000",
+  origin : "https://deputy-clone-frontend-1x5v.vercel.app",
   credentials: true
 }));
 
