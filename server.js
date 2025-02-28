@@ -15,22 +15,13 @@ app.use(cookieParser());
 app.use(express.json());
 
 // Enable CORS
-const allowedOrigins = [
-  'https://deputy-clone-frontend.vercel.app',
-  'https://deputy-clone-frontend-1x5v-ep6gbyqsa-manish9811s-projects.vercel.app',
-  'http://localhost:3000'
-];
+
 
 app.use(cors({
-  origin: function (origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  credentials: true
-}));
+  origin: 'https://deputy-clone-frontend-1x5v.vercel.app',
+  credentials:true
+}))
+
 
 
 // Handle CORS preflight requests
