@@ -25,7 +25,6 @@ app.use(cors({
 
 
 // Handle CORS preflight requests
-app.options('*', cors());
 
 // Set up routes
 app.get('/', (req, res) => {
