@@ -1,25 +1,35 @@
-// server.js
 import express from 'express';
 import cors from 'cors';
-import { UserAuthenticate } from './Routes/Register.js';
 import dotenv from 'dotenv';
-import { UserTimeController } from './Routes/ShiftTimeCalculate.js';
 import cookieParser from 'cookie-parser';
+import { UserAuthenticate } from './Routes/Register.js';
+import { UserTimeController } from './Routes/ShiftTimeCalculate.js';
 import { AuthenticationCheck } from './Routes/Authentication.js';
 
-const app = express();
-app.use(cookieParser())
 dotenv.config();
-const port = process.env.PORT || 5002
+
+const app = express();
+const port = process.env.PORT || 5002;
+
+app.use(cookieParser());
+app.use(express.json());
 
 // Enable CORS
+const allowedOrigins = ['https://deputy-clone-frontend.vercel.app', 'http://localhost:3000'];
+
 app.use(cors({
-  origin: ['https://deputy-clone-frontend.vercel.app', 'http://localhost:3000'],
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true
 }));
 
-// Middleware to handle JSON request body
-app.use(express.json());
+// Handle CORS preflight requests
+app.options('*', cors());
 
 // Set up routes
 app.get('/', (req, res) => {
@@ -27,12 +37,10 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api', UserAuthenticate);
-app.use('/api',UserTimeController)
-app.use('/api/auth',AuthenticationCheck)
+app.use('/api', UserTimeController);
+app.use('/api/auth', AuthenticationCheck);
 
-// Export the handler as a serverless function
-app.listen((port),()=>{
-  console.log("app is runnin", port) 
-  
-})
-
+// Start server
+app.listen(port, () => {
+  console.log(`App is running on port ${port}`);
+});
